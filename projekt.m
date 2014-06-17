@@ -355,7 +355,7 @@ lista = get(hObject,'Value');
 axes(handles.wykresik);
 cla;
 switch lista
-    case 1        %%%%%%%%%%%%%%%%%%%%%%%%%%% noúna
+    case 1        %%%%%%%%%%%%%%%%%%%%%%%%%%% no≈õna
         lm=getappdata(0,'lm');
         
         Tb=getappdata(0,'Tb');
@@ -369,20 +369,22 @@ switch lista
         end
         plot(x,d);
         axis([0 lm min(c)-0.3 max(c)+0.3]);
+        xlim([0 20]);
         hold off
         title('nosna');  
         zoom on;
     
-    case 2              %%%%%%%%%%%%%%%%% sygna≥ zmodulowany
+    case 2              %%%%%%%%%%%%%%%%% sygna≈Ç zmodulowany
         Tb=getappdata(0,'Tb');
         lm=getappdata(0,'lm');
         mod=getappdata(0,'mod');
         x=1/Tb:1/Tb:lm;
         plot(x,mod);
         title('sygnal zmodulowany');
+        xlim([0 20]);
         zoom on;
         
-    case 3              %%%%%%%%%%%%%%%%%%%%%%%  sygna≥ wejúciowy
+    case 3              %%%%%%%%%%%%%%%%%%%%%%%  sygna≈Ç wej≈õciowy
         m=getappdata(0,'m');
         lm=getappdata(0,'lm');
         hold on;
@@ -390,17 +392,19 @@ switch lista
         plot(lm-1:0.001:lm,m(lm), 'b-');
         axis([0 lm -0.5 1.5]);
         title('sygnal wejsciowy');
+        xlim([0 20]);
         hold off;
         zoom on;
         
-    case 4              %%%%%%%%%%%%%%%%%%%%%%% wiadomoúÊ odebrana
+    case 4              %%%%%%%%%%%%%%%%%%%%%%% wiadomo≈õƒá odebrana
         dem=getappdata(0,'dem');
         lm=getappdata(0,'lm');
         hold on;
         stairs(0:lm-1,dem);
         plot(lm-1:0.001:lm,dem(lm), 'b-');
         axis([0 lm -0.5 1.5]);
-        title('sygnal wyjúciowy');
+        title('sygnal wyj≈õciowy');
+        xlim([0 20]);
         hold off;
         zoom on;
 end
