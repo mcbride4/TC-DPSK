@@ -371,7 +371,7 @@ switch lista
         axis([0 lm min(c)-0.3 max(c)+0.3]);
         xlim([0 20]);
         hold off
-        title('nosna');  
+        title('noúna');  
         zoom on;
     
     case 2              %%%%%%%%%%%%%%%%% sygna≈Ç zmodulowany
@@ -380,7 +380,7 @@ switch lista
         mod=getappdata(0,'mod');
         x=1/Tb:1/Tb:lm;
         plot(x,mod);
-        title('sygnal zmodulowany');
+        title('sygna≥ zmodulowany');
         xlim([0 20]);
         zoom on;
         
@@ -391,7 +391,7 @@ switch lista
         stairs(0:lm-1,m);
         plot(lm-1:0.001:lm,m(lm), 'b-');
         axis([0 lm -0.5 1.5]);
-        title('sygnal wejsciowy');
+        title('sygna≥ wejúciowy');
         xlim([0 20]);
         hold off;
         zoom on;
@@ -403,7 +403,7 @@ switch lista
         stairs(0:lm-1,dem);
         plot(lm-1:0.001:lm,dem(lm), 'b-');
         axis([0 lm -0.5 1.5]);
-        title('sygnal wyj≈õciowy');
+        title('sygna≥ wyjúciowy');
         xlim([0 20]);
         hold off;
         zoom on;
