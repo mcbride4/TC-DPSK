@@ -358,7 +358,11 @@ lista = get(handles.lista,'Value');
 axes(handles.wykresik);
 cla;
 switch lista
+<<<<<<< HEAD
     case 1        %%%%%%%%%%%%%%%%%%%%%%%%%%% noœna
+=======
+    case 1        %%%%%%%%%%%%%%%%%%%%%%%%%%% nosna
+>>>>>>> origin/master
         lm=getappdata(0,'lm');
         
         Tb=getappdata(0,'Tb');
@@ -374,20 +378,41 @@ switch lista
         axis([0 lm min(c)-0.3 max(c)+0.3]);
         xlim([0 20]);
         hold off
-        title('noœna');  
+        title('nosna');  
         zoom on;
     
+<<<<<<< HEAD
     case 2              %%%%%%%%%%%%%%%%% sygna³‚ zmodulowany
+=======
+    case 2              %%%%%%%%%%%%%%%%% sygnal zmodulowany
+>>>>>>> origin/master
         Tb=getappdata(0,'Tb');
         lm=getappdata(0,'lm');
         mod=getappdata(0,'mod');
         x=1/Tb:1/Tb:lm;
         plot(x,mod);
         title('sygnal zmodulowany');
+<<<<<<< HEAD
         xlim([0 20]);
         zoom on;
         
     case 3              %%%%%%%%%%%%%%%%%%%%%%%  sygna³‚ wejœciowy
+=======
+        xlim([0 20]);
+        zoom on;
+
+    case 3              %%%%%%%%%%%%%%%%% sygnal zmodulowany z szumem
+        Tb=getappdata(0,'Tb');
+        lm=getappdata(0,'lm');
+        modZSzumem=getappdata(0,'modZSzumem');
+        x=1/Tb:1/Tb:lm;
+        plot(x,modZSzumem);
+        title('sygnal zmodulowany z szumem');
+        xlim([0 20]);
+        zoom on;
+        
+    case 4              %%%%%%%%%%%%%%%%%%%%%%%  sygnal wejsciowy
+>>>>>>> origin/master
         m=getappdata(0,'m');
         lm=getappdata(0,'lm');
         hold on;
@@ -399,7 +424,11 @@ switch lista
         hold off;
         zoom on;
         
+<<<<<<< HEAD
     case 4              %%%%%%%%%%%%%%%%%%%%%%% wiadomoœæ odebrana
+=======
+    case 5              %%%%%%%%%%%%%%%%%%%%%%% wiadomosc odebrana
+>>>>>>> origin/master
         dem=getappdata(0,'dem');
         lm=getappdata(0,'lm');
         hold on;
