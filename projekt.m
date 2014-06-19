@@ -355,7 +355,7 @@ lista = get(hObject,'Value');
 axes(handles.wykresik);
 cla;
 switch lista
-    case 1        %%%%%%%%%%%%%%%%%%%%%%%%%%% nośna
+    case 1        %%%%%%%%%%%%%%%%%%%%%%%%%%% nosna
         lm=getappdata(0,'lm');
         
         Tb=getappdata(0,'Tb');
@@ -371,20 +371,30 @@ switch lista
         axis([0 lm min(c)-0.3 max(c)+0.3]);
         xlim([0 20]);
         hold off
-        title('no�na');  
+        title('nosna');  
         zoom on;
     
-    case 2              %%%%%%%%%%%%%%%%% sygnał zmodulowany
+    case 2              %%%%%%%%%%%%%%%%% sygnal zmodulowany
         Tb=getappdata(0,'Tb');
         lm=getappdata(0,'lm');
         mod=getappdata(0,'mod');
         x=1/Tb:1/Tb:lm;
         plot(x,mod);
-        title('sygna� zmodulowany');
+        title('sygnal zmodulowany');
+        xlim([0 20]);
+        zoom on;
+
+    case 3              %%%%%%%%%%%%%%%%% sygnal zmodulowany z szumem
+        Tb=getappdata(0,'Tb');
+        lm=getappdata(0,'lm');
+        modZSzumem=getappdata(0,'modZSzumem');
+        x=1/Tb:1/Tb:lm;
+        plot(x,modZSzumem);
+        title('sygnal zmodulowany z szumem');
         xlim([0 20]);
         zoom on;
         
-    case 3              %%%%%%%%%%%%%%%%%%%%%%%  sygnał wejściowy
+    case 4              %%%%%%%%%%%%%%%%%%%%%%%  sygnal wejsciowy
         m=getappdata(0,'m');
         lm=getappdata(0,'lm');
         hold on;
@@ -396,7 +406,7 @@ switch lista
         hold off;
         zoom on;
         
-    case 4              %%%%%%%%%%%%%%%%%%%%%%% wiadomość odebrana
+    case 5              %%%%%%%%%%%%%%%%%%%%%%% wiadomosc odebrana
         dem=getappdata(0,'dem');
         lm=getappdata(0,'lm');
         hold on;

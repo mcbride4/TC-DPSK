@@ -99,8 +99,8 @@ setappdata(0,'c',c);
 setappdata(0,'lm',lm);
 
 setappdata(0,'Tb',Tb);
-setappdata(0,'mod',mod);
-setappdata(0,'modZSzumem',mod_szum);
+setappdata(0,'mod',mod_szum);
+setappdata(0,'mod',mod_szum);
 setappdata(0,'dem',dem);
 end
 
