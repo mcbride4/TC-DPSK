@@ -167,6 +167,7 @@ setappdata(0,'m',0);
 setappdata(0,'Tb',0);
 setappdata(0,'mod',0);
 setappdata(0,'dem',0);
+setappdata(0,'mod_szum',0);
 message = wpisz_recznie(handles.tekstowo);
 if (handles.bpskbutton==1)
     if (handles.czyszum==1)
@@ -205,6 +206,7 @@ setappdata(0,'m',0);
 setappdata(0,'Tb',0);
 setappdata(0,'mod',0);
 setappdata(0,'dem',0);
+setappdata(0,'mod_szum',0);
 snr = handles.suwak;
 if (handles.bpskbutton==1)
     if (handles.czyszum==1)
@@ -351,11 +353,12 @@ function lista_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns lista contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from lista
 
-lista = get(hObject,'Value');
+lista = get(handles.lista,'Value');
+
 axes(handles.wykresik);
 cla;
 switch lista
-    case 1        %%%%%%%%%%%%%%%%%%%%%%%%%%% noÅ›na
+    case 1        %%%%%%%%%%%%%%%%%%%%%%%%%%% noœna
         lm=getappdata(0,'lm');
         
         Tb=getappdata(0,'Tb');
@@ -374,40 +377,57 @@ switch lista
         title('noœna');  
         zoom on;
     
-    case 2              %%%%%%%%%%%%%%%%% sygnaÅ‚ zmodulowany
+    case 2              %%%%%%%%%%%%%%%%% sygna³‚ zmodulowany
         Tb=getappdata(0,'Tb');
         lm=getappdata(0,'lm');
         mod=getappdata(0,'mod');
         x=1/Tb:1/Tb:lm;
         plot(x,mod);
-        title('sygna³ zmodulowany');
+        title('sygnal zmodulowany');
         xlim([0 20]);
         zoom on;
         
-    case 3              %%%%%%%%%%%%%%%%%%%%%%%  sygnaÅ‚ wejÅ›ciowy
+    case 3              %%%%%%%%%%%%%%%%%%%%%%%  sygna³‚ wejœciowy
         m=getappdata(0,'m');
         lm=getappdata(0,'lm');
         hold on;
         stairs(0:lm-1,m);
         plot(lm-1:0.001:lm,m(lm), 'b-');
         axis([0 lm -0.5 1.5]);
-        title('sygna³ wejœciowy');
+        title('sygnal wejœciowy');
         xlim([0 20]);
         hold off;
         zoom on;
         
-    case 4              %%%%%%%%%%%%%%%%%%%%%%% wiadomoÅ›Ä‡ odebrana
+    case 4              %%%%%%%%%%%%%%%%%%%%%%% wiadomoœæ odebrana
         dem=getappdata(0,'dem');
         lm=getappdata(0,'lm');
         hold on;
         stairs(0:lm-1,dem);
         plot(lm-1:0.001:lm,dem(lm), 'b-');
         axis([0 lm -0.5 1.5]);
-        title('sygna³ wyjœciowy');
+        title('sygnal wyjœciowy');
         xlim([0 20]);
         hold off;
         zoom on;
+        
+    case 5              %%%%%%%%%%%%%%%%%%%%%%%% sygna³ zmodulowany i zaszumiony
+        Tb=getappdata(0,'Tb');
+        lm=getappdata(0,'lm');
+        mod_szum=getappdata(0,'mod_szum');
+        if (mod_szum == 0)
+            set(handles.lista,'Value',2);
+            lista_Callback(hObject, eventdata, handles);
+        else
+        x=1/Tb:1/Tb:lm;
+        plot(x,mod_szum);
+        title('sygnal w odbiorniku');
+        xlim([0 20]);
+        zoom on;
+        end
 end
+
+
 guidata(hObject, handles);
 
 % --- Executes during object creation, after setting all properties.
@@ -451,39 +471,50 @@ function BER_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 axes(handles.wykresik);
 cla;
-snr = 0:0.5:16;        
+snr = 0:16;        
 ebn0=[];
 
+            
+
+    
 wiadomosc = randomowo(handles.bityber);       %%%%%%%%%%%%
 if (handles.bpskBER==1)
-    for i=1:length(snr)
-        ebn0(i)= 10^(snr(i)/10);
-        Pe(i) = 0.5*erfc(sqrt(ebn0(i)));         %% teoretyczny BER
+    for step=1:length(snr)
+        ebn0(step)= 10^(snr(step)/10);
+        Pe(step) = 0.5*erfc(sqrt(ebn0(step)));         %% teoretyczny BER
     end
-        semilogy(snr,Pe,'-og');
-        hold on;
-    for i=1:length(snr)
-        message = bpskAWGN(snr(i),wiadomosc);
-        ter(i)=bit_error(wiadomosc,message);
-    end     
-     ber=ter/length(wiadomosc);     
+ h = waitbar(0,'Proszê czekaæ...');
+            steps = length(snr);       
+    for step=1:steps
+        message = bpsk_ber(snr(step),wiadomosc);
+        ter(step)=bit_error(wiadomosc,message);
+        
+        waitbar(step/steps)
+    end
+    close(h)
+    semilogy(snr,Pe,'-og');
+        hold on;    
+     ber=ter./length(wiadomosc);     
      semilogy(snr,ber,'-or');
      hold off;
 else
      load('ber_dpsk.mat');
      semilogy(ebno0,ber0,'g');    %%% teoretyczny ber dla dpsk
      hold on;
-     for i=1:length(snr)
-        ebn0(i)= 10^(snr(i)/10);        
-     end
-    for i=1:length(snr)
-        message = dpskAWGN(snr(i),wiadomosc);
-        ter(i)=bit_error(wiadomosc,message);
+     
+     h = waitbar(0,'Proszê czekaæ...');
+            steps = length(snr);       
+    for step=1:steps
+        message = dpsk_ber(snr(step),wiadomosc);
+        ter(step)=bit_error(wiadomosc,message);
+        waitbar(step/steps)
     end
+    close(h)
      ber=ter/length(wiadomosc);    
      semilogy(snr,ber,'-or');
      hold off;     
 end
+
 set(handles.blad,'String',sum(abs(ter)));
 
 

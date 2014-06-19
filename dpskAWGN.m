@@ -80,7 +80,7 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%55 subplot 3 - sygnal zmodolony
 % subplot(4,1,3);
 % x=1/Tb:1/Tb:lm;
-mod_szum = szum(snr,mod,f0);
+mod_szum = szum(snr,mod);
 % plot(x,mod_szum);
 % title('sygnal zmodulowany');
 
@@ -143,7 +143,8 @@ setappdata(0,'t',t);
 setappdata(0,'c',c);
 setappdata(0,'lm',lm);
 setappdata(0,'Tb',Tb);
-setappdata(0,'mod',mod_szum);
+setappdata(0,'mod_szum',mod_szum);
+setappdata(0,'mod',mod);
 setappdata(0,'dem',dem);
 end
 

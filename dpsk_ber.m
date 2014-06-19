@@ -49,7 +49,7 @@ end
 
 
 
-mod_szum = szum(snr,mod,f0);
+mod_szum = szum(snr,mod);
 
 
 %%%%%%%%%%%%% demodulator

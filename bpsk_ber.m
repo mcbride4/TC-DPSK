@@ -27,7 +27,7 @@ end
 
 
 
-mod_szum = szum(snr, mod,f0);   %%dodanie AWGN 
+mod_szum = szum(snr, mod);   %%dodanie AWGN 
 
 
 %%%%%%%%%%%%% demodulator
