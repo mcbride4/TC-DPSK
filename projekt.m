@@ -474,7 +474,7 @@ function BER_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 axes(handles.wykresik);
 cla;
-snr = 0:16;        
+snr = -4:13;        
 ebn0=[];
 
             
@@ -498,7 +498,7 @@ if (handles.bpskBER==1)
     semilogy(snr,Pe,'-og');
         hold on;    
      ber=ter./length(wiadomosc);     
-     semilogy(snr,ber,'-or');
+     semilogy(snr,ber,'or');
      hold off;
 else
      load('ber_dpsk.mat');
