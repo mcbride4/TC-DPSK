@@ -99,13 +99,10 @@ setappdata(0,'c',c);
 setappdata(0,'lm',lm);
 
 setappdata(0,'Tb',Tb);
-<<<<<<< HEAD
 setappdata(0,'mod_szum',mod_szum);
 setappdata(0,'mod',mod);
-=======
 setappdata(0,'mod',mod);
 setappdata(0,'modZSzumem',mod_szum);
->>>>>>> origin/master
 setappdata(0,'dem',dem);
 end
 
